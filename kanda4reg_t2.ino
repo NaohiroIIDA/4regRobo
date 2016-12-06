@@ -2,14 +2,14 @@
 #include <SoftwareSerial.h>
 
 
-//#define DEBUG
+#define DEBUG
 //#define DEMO
 
 
 
 
 #define PIN 10
-#define LED_NUM 30
+#define LED_NUM 34
 
 #define leg_up 8000
 #define leg_down 5500
@@ -53,6 +53,9 @@ int led_mode;
 int led_pos;
 int led_light;
 
+int sensor_tick;
+
+
 
 
 
@@ -85,6 +88,7 @@ void setup() {
   led_mode  = 1;
   led_pos   = 0;
 
+  sensor_tick = 0;
 
   strip.begin();
   all_clear();
@@ -157,8 +161,38 @@ void setup() {
 
 void loop() {
 
+  int dir,power,power2;
+
+
 
 //demo_move();
+
+  sensor_tick++;
+  if(sensor_tick >2000){
+
+    sensor_tick = 0;
+    get_light();
+    dir = get_light_dir();
+    power = get_light_power();
+    power2 = get_light_power_upside();
+
+    #ifdef DEBUG
+      Serial.print(dir);
+      Serial.print("\t");
+      Serial.print(power);
+
+      Serial.print("\t");
+      Serial.println(power2);
+    #endif
+
+    
+
+
+
+
+
+  }
+
 
 led_tick++;
 if(led_tick > 10){
@@ -368,7 +402,7 @@ if(walk_mode == 0){
 
         case 1:
           tgt[1] = leg_bw13;  spd[1] = 10;
-          tgt[3] = leg_fw13;  spd[3] = 1;
+          tgt[3] = leg_fw13;  spd[3] = 2;
           tgt[5] = leg_bw57;  spd[5] = 1;
           tgt[7] = leg_bw57;  spd[7] = 1;
 
@@ -388,7 +422,7 @@ if(walk_mode == 0){
         case 4:
           tgt[1] = leg_fw13;  spd[1] = 1;
           tgt[3] = leg_bw13;  spd[3] = 10;
-          tgt[5] = leg_bw57;  spd[5] = 1;
+          tgt[5] = leg_bw57;  spd[5] = 2;
           tgt[7] = leg_bw57;  spd[7] = 1;
 
           now_move = 3;
@@ -408,7 +442,7 @@ if(walk_mode == 0){
           tgt[1] = leg_fw13;  spd[1] = 1;
           tgt[3] = leg_fw13;  spd[3] = 1;
           tgt[5] = leg_fw57;  spd[5] = 10;
-          tgt[7] = leg_bw57;  spd[7] = 1;
+          tgt[7] = leg_bw57;  spd[7] = 2;
 
           now_move = 5;
         break;
@@ -424,7 +458,7 @@ if(walk_mode == 0){
         break;
 
         case 10:
-          tgt[1] = leg_fw13;  spd[1] = 1;
+          tgt[1] = leg_fw13;  spd[1] = 2;
           tgt[3] = leg_fw13;  spd[3] = 1;
           tgt[5] = leg_bw57;  spd[5] = 1;
           tgt[7] = leg_fw57;  spd[7] = 10;
@@ -436,6 +470,7 @@ if(walk_mode == 0){
           tgt[6] = leg_down;  spd[6] = 20;
           now_move = 6;
         break;
+
 
 
         
