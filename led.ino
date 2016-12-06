@@ -36,42 +36,20 @@ void all_clear()
   delay(10);
 }
 
-void all_up()
-{
-  for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] += 1;led_g[i] +=1; led_b[i] += 1;
+int led_blight(int goal,int par){
 
-    if(led_r[i] >255) led_r[i] = 255;
-    if(led_g[i] >255) led_g[i] = 255;
-    if(led_b[i] >255) led_b[i] = 255;
-
-    strip.setPixelColor(i, strip.Color(led_r[i], led_g[i], led_b[i]));
-  }
-  strip.show();
-  delay(10);
-}
-
-void all_down()
-{
-  for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] -=1; led_b[i] -= 1;
-
-    if(led_r[i] <0) led_r[i] = 0;
-    if(led_g[i] <0) led_g[i] = 0;
-    if(led_b[i] <0) led_b[i] = 0;
-
-    strip.setPixelColor(i, strip.Color(led_r[i], led_g[i], led_b[i]));
-  }
-  strip.show();
-  delay(10);
+  int ret = goal * par / 256;
+  return ret;
 }
 
 
-
-void all_up_green()
+void led_loop_set(byte R, byte G, byte B, int par)
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] +=1; led_b[i] -= 1;
+
+    led_r[i] = led_blight(R,par);
+    led_g[i] = led_blight(G,par);
+    led_b[i] = led_blight(B,par);
 
     if(led_r[i] >255) led_r[i] = 255;
     if(led_g[i] >255) led_g[i] = 255;
@@ -83,43 +61,6 @@ void all_up_green()
     strip.setPixelColor(i, strip.Color(led_r[i], led_g[i], led_b[i]));
   }
   strip.show();
-  delay(10);
-}
-
-void all_up_red()
-{
-  for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] += 1;led_g[i] -= 1; led_b[i] -= 1 ;
-
-    if(led_r[i] >255) led_r[i] = 255;
-    if(led_g[i] >255) led_g[i] = 255;
-    if(led_b[i] >255) led_b[i] = 255;
-    if(led_r[i] <0) led_r[i] = 0;
-    if(led_g[i] <0) led_g[i] = 0;
-    if(led_b[i] <0) led_b[i] = 0;
-
-    strip.setPixelColor(i, strip.Color(led_r[i], led_g[i], led_b[i]));
-  }
-  strip.show();
-  delay(10);
-}
-
-void all_up_blue()
-{
-  for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] -= 1; led_b[i] += 1;
-
-    if(led_r[i] >255) led_r[i] = 255;
-    if(led_g[i] >255) led_g[i] = 255;
-    if(led_b[i] >255) led_b[i] = 255;
-    if(led_r[i] <0) led_r[i] = 0;
-    if(led_g[i] <0) led_g[i] = 0;
-    if(led_b[i] <0) led_b[i] = 0;
-
-    strip.setPixelColor(i, strip.Color(led_r[i], led_g[i], led_b[i]));
-  }
-  strip.show();
-  delay(10);
 }
 
 
