@@ -29,7 +29,7 @@ void mp3_sdset(){
   delay(100);
 }
 
-void mp3_vol(){
+void mp3_vol(byte vol){
 
   mySerial.write((byte)0x7E);   // start
   mySerial.write((byte)0xFF);   // ver
@@ -37,7 +37,7 @@ void mp3_vol(){
   mySerial.write((byte)0x06);   // command
   mySerial.write((byte)0x00);   // res
   mySerial.write((byte)0x00);   // param 1
-  mySerial.write((byte)0x18);   // param 2
+  mySerial.write((byte)vol);   // param 2
   mySerial.write((byte)0xEF);   // end
 
   delay(100);

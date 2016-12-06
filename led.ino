@@ -26,7 +26,7 @@ void eye(byte R, byte G, byte B, long i) {
 }
 
 
-void all_clear()
+void led_all_clear()
 {
   for (long i = 0; i < LED_NUM; i++) {
     led_r[i] = 0;led_g[i] = 0; led_b[i] = 0;
@@ -39,7 +39,7 @@ void all_clear()
 void all_up()
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] += 1;led_g[i] +=1; led_b[i] += 1;
+    led_r[i] += 1;led_g[i] +=1; led_b[i] += 4;
 
     if(led_r[i] >255) led_r[i] = 255;
     if(led_g[i] >255) led_g[i] = 255;
@@ -54,7 +54,7 @@ void all_up()
 void all_down()
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] -=1; led_b[i] -= 1;
+    led_r[i] -= 1;led_g[i] -=1; led_b[i] -= 4;
 
     if(led_r[i] <0) led_r[i] = 0;
     if(led_g[i] <0) led_g[i] = 0;
@@ -71,7 +71,7 @@ void all_down()
 void all_up_green()
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] +=1; led_b[i] -= 1;
+    led_r[i] -= 1;led_g[i] +=1; led_b[i] -= 4;
 
     if(led_r[i] >255) led_r[i] = 255;
     if(led_g[i] >255) led_g[i] = 255;
@@ -89,7 +89,7 @@ void all_up_green()
 void all_up_red()
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] += 1;led_g[i] -= 1; led_b[i] -= 1 ;
+    led_r[i] += 1;led_g[i] -= 1; led_b[i] -= 4 ;
 
     if(led_r[i] >255) led_r[i] = 255;
     if(led_g[i] >255) led_g[i] = 255;
@@ -107,7 +107,7 @@ void all_up_red()
 void all_up_blue()
 {
   for (long i = 0; i < LED_NUM; i++) {
-    led_r[i] -= 1;led_g[i] -= 1; led_b[i] += 1;
+    led_r[i] -= 1;led_g[i] -= 1; led_b[i] += 4;
 
     if(led_r[i] >255) led_r[i] = 255;
     if(led_g[i] >255) led_g[i] = 255;
