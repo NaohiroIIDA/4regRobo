@@ -4,7 +4,9 @@ void pos_init(){
 
 	for (int i = 0; i < 8; ++i)
 	{
-		pos_leg[i] = leg_center;
+		leg[i] = leg_center;
+    tgt[i] = leg_center;
+    spd[i] = 10;
 	}
 }
 
@@ -26,90 +28,76 @@ byte ics_pos_l(int data) {
 
 void ics_pos_write(int id, int data) {
   Serial1.write(0x80 + (id + 1));
-  Serial1.write(ics_pos_h(pos));
-  Serial1.write(ics_pos_l(pos));
+  Serial1.write(ics_pos_h(data));
+  Serial1.write(ics_pos_l(data));
   // delay(10);
 }
 
-void pos_speed_set(int id,int target,int speed){
 
-	if(pos_leg[id] > target){
+void loop_motor(){
+  for (int i = 0; i < 8; ++i)
+  {
+    if(leg[i] != tgt[i]){
 
-		while(pos_leg[id] > target)
-		{
-			pos_leg[id] -= speed;
-			ics_pos_write(id, pos_leg[id]);
-		}
 
-	}else{
-		while(pos_leg[id] < target)
-		{
-			pos_leg[id] += speed;
-			ics_pos_write(id, pos_leg[id]);
-		}
-	}
+      if(leg[i] > tgt[i]){
+        leg[i] -= spd[i];
+        if(leg[i] < tgt[i]) leg[i] = tgt[i];
+      }else{
+        leg[i] += spd[i];
+        if(leg[i] > tgt[i]) leg[i] = tgt[i];
+      }
+    }
+  }
 
 }
 
+void pos_motor_set(){
 
+for (int i = 0; i < 8; ++i)
+  {
+    ics_pos_write(i, leg[i]);
+  }
+}
+
+void demo_set(int data)
+{
+
+  for (int i = 0; i < 8; ++i)
+  {
+    leg[i] = data;
+  }
+}
 
 
 void demo_move(){
 	
   for (pos = 7500; pos < 9500; pos += 2) {
 
-    ics_pos_write(0, pos);
-    ics_pos_write(1, pos);
-    ics_pos_write(2, pos);
-    ics_pos_write(3, pos);
-    ics_pos_write(4, pos);
-    ics_pos_write(5, pos);
-    ics_pos_write(6, pos);
-    ics_pos_write(7, pos);
+    demo_set(pos);
+    pos_motor_set();
+   
   }
 
   for (pos = 9500; pos > 7500; pos -= 2) {
 
-    ics_pos_write(0, pos);
-    ics_pos_write(1, pos);
-    ics_pos_write(2, pos);
-    ics_pos_write(3, pos);
-    ics_pos_write(4, pos);
-    ics_pos_write(5, pos);
-    ics_pos_write(6, pos);
-    ics_pos_write(7, pos);
+   demo_set(pos);
+    pos_motor_set();
+   
   }
-
-
-
-
 
   for (pos = 7500; pos > 5500; pos -= 2) {
 
-    ics_pos_write(0, pos);
-    ics_pos_write(1, pos);
-    ics_pos_write(2, pos);
-    ics_pos_write(3, pos);
-    ics_pos_write(4, pos);
-    ics_pos_write(5, pos);
-    ics_pos_write(6, pos);
-    ics_pos_write(7, pos);
-
+    demo_set(pos);
+    pos_motor_set();
+   
   }
-
-  
-
 
   for (pos = 5500; pos < 7500; pos += 2) {
 
-    ics_pos_write(0, pos);
-    ics_pos_write(1, pos);
-    ics_pos_write(2, pos);
-    ics_pos_write(3, pos);
-    ics_pos_write(4, pos);
-    ics_pos_write(5, pos);
-    ics_pos_write(6, pos);
-    ics_pos_write(7, pos);
+    demo_set(pos);
+    pos_motor_set();
+   
   }
 
 
