@@ -2,7 +2,7 @@
 #include <SoftwareSerial.h>
 
 
-//#define DEBUG
+#define DEBUG
 //#define DEMO
 
 #define PIN 10
@@ -54,6 +54,7 @@ int led_pos;
 int led_light;
 
 int sensor_tick;
+int sensor_delay;
 
 
 
@@ -89,6 +90,8 @@ void setup() {
   led_pos   = 0;
 
   sensor_tick = 0;
+  sensor_delay = 0;
+
 
   strip.begin();
   all_clear();
@@ -181,6 +184,15 @@ void loop() {
         walk_mode = 3;
         motor_mode = 0;
       }
+
+      if(walk_mode == 3 && motor_mode == 4 && power > 500){
+        motor_mode = 5;
+      }
+
+      if(walk_mode == 3 && motor_mode == 7 && power < 500){
+        motor_mode = 0;
+      }
+
     }else{
       if(walk_mode == 3 && motor_mode == 4){
         walk_mode = 4;
@@ -190,6 +202,9 @@ void loop() {
       if(walk_mode == 4 && motor_mode == 2){
         walk_mode = 0;
         motor_mode = 0;
+
+        led_mode = 5;
+        led_light = 0;
       }
 
       if(walk_mode == 0 || walk_mode == 1 || walk_mode == 2 ){
@@ -197,15 +212,23 @@ void loop() {
         switch(dir){
           case 1:
             if(walk_mode != 0){
-              walk_mode = 0;
-              motor_mode = 0;
+             
+
+                walk_mode = 0;
+                motor_mode = 0;
+
+                led_mode = 5;
+                led_light = 0;
             }
           break;
-
           case 2:
             if(walk_mode != 2){
               walk_mode = 2;
               motor_mode = 0;
+
+              led_mode = 1;
+              led_pos = 0;
+              sensor_delay = 5;
             }
           break;
 
@@ -213,6 +236,11 @@ void loop() {
             if(walk_mode != 2){
               walk_mode = 2;
               motor_mode = 0;
+
+              led_mode = 1;
+              led_pos = 0;
+
+              sensor_delay = 5;
             }
           break;
 
@@ -220,6 +248,11 @@ void loop() {
             if(walk_mode != 1){
               walk_mode = 1;
               motor_mode = 0;
+
+              led_mode = 0;
+              led_pos = 0;
+
+              sensor_delay = 2;
             }
           break;
 

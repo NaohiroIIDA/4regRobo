@@ -121,7 +121,7 @@ void master_led_loop() {
 
     if (led_mode == 5) {                            // white led (up)
     led_loop_set(255, 255, 255, led_light);
-    led_light++;
+    led_light+=5;
     if (led_light > 100) {
       led_light = 100;
       led_mode = 6;
@@ -130,7 +130,7 @@ void master_led_loop() {
   }
   if (led_mode == 6) {                            // white led (down)
     led_loop_set(255, 255, 255, led_light);
-    led_light-=4;
+    led_light-=5;
     if (led_light < 0) {
       led_light = 0;
       led_mode = 5;

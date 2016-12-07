@@ -170,9 +170,9 @@ void master_motor_loop() {
 
         case 1:
           tgt[1] = leg_fw13;  spd[1] = 10;
-          tgt[3] = leg_bw13;  spd[3] = 1;
-          tgt[5] = leg_fw57;  spd[5] = 1;
-          tgt[7] = leg_fw57;  spd[7] = 1;
+          tgt[3] = leg_bw13;  spd[3] = 2;
+          tgt[5] = leg_fw57;  spd[5] = 2;
+          tgt[7] = leg_fw57;  spd[7] = 2;
 
           now_move = 1;
           break;
@@ -188,10 +188,10 @@ void master_motor_loop() {
           break;
 
         case 4:
-          tgt[1] = leg_bw13;  spd[1] = 1;
+          tgt[1] = leg_bw13;  spd[1] = 2;
           tgt[3] = leg_fw13;  spd[3] = 10;
-          tgt[5] = leg_fw57;  spd[5] = 1;
-          tgt[7] = leg_fw57;  spd[7] = 1;
+          tgt[5] = leg_fw57;  spd[5] = 2;
+          tgt[7] = leg_fw57;  spd[7] = 2;
 
           now_move = 3;
           break;
@@ -207,10 +207,10 @@ void master_motor_loop() {
           break;
 
         case 7:
-          tgt[1] = leg_bw13;  spd[1] = 1;
-          tgt[3] = leg_bw13;  spd[3] = 1;
+          tgt[1] = leg_bw13;  spd[1] = 2;
+          tgt[3] = leg_bw13;  spd[3] = 2;
           tgt[5] = leg_bw57;  spd[5] = 10;
-          tgt[7] = leg_fw57;  spd[7] = 1;
+          tgt[7] = leg_fw57;  spd[7] = 2;
 
           now_move = 5;
           break;
@@ -226,9 +226,9 @@ void master_motor_loop() {
           break;
 
         case 10:
-          tgt[1] = leg_bw13;  spd[1] = 1;
-          tgt[3] = leg_bw13;  spd[3] = 1;
-          tgt[5] = leg_fw57;  spd[5] = 1;
+          tgt[1] = leg_bw13;  spd[1] = 2;
+          tgt[3] = leg_bw13;  spd[3] = 2;
+          tgt[5] = leg_fw57;  spd[5] = 2;
           tgt[7] = leg_bw57;  spd[7] = 10;
 
           now_move = 7;
@@ -264,8 +264,8 @@ void master_motor_loop() {
         case 1:
           tgt[1] = leg_bw13;  spd[1] = 10;
           tgt[3] = leg_fw13;  spd[3] = 2;
-          tgt[5] = leg_bw57;  spd[5] = 1;
-          tgt[7] = leg_bw57;  spd[7] = 1;
+          tgt[5] = leg_bw57;  spd[5] = 2;
+          tgt[7] = leg_bw57;  spd[7] = 2;
 
           now_move = 1;
           break;
@@ -281,10 +281,10 @@ void master_motor_loop() {
           break;
 
         case 4:
-          tgt[1] = leg_fw13;  spd[1] = 1;
+          tgt[1] = leg_fw13;  spd[1] = 2;
           tgt[3] = leg_bw13;  spd[3] = 10;
           tgt[5] = leg_bw57;  spd[5] = 2;
-          tgt[7] = leg_bw57;  spd[7] = 1;
+          tgt[7] = leg_bw57;  spd[7] = 2;
 
           now_move = 3;
           break;
@@ -300,8 +300,8 @@ void master_motor_loop() {
           break;
 
         case 7:
-          tgt[1] = leg_fw13;  spd[1] = 1;
-          tgt[3] = leg_fw13;  spd[3] = 1;
+          tgt[1] = leg_fw13;  spd[1] = 2;
+          tgt[3] = leg_fw13;  spd[3] = 2;
           tgt[5] = leg_fw57;  spd[5] = 10;
           tgt[7] = leg_bw57;  spd[7] = 2;
 
@@ -320,8 +320,8 @@ void master_motor_loop() {
 
         case 10:
           tgt[1] = leg_fw13;  spd[1] = 2;
-          tgt[3] = leg_fw13;  spd[3] = 1;
-          tgt[5] = leg_bw57;  spd[5] = 1;
+          tgt[3] = leg_fw13;  spd[3] = 2;
+          tgt[5] = leg_bw57;  spd[5] = 2;
           tgt[7] = leg_fw57;  spd[7] = 10;
 
           now_move = 7;
@@ -399,8 +399,31 @@ void master_motor_loop() {
           case 3:
           led_mode = 2;
           led_light = 0;
-          
+
           motor_mode = 4;
+          break;
+
+          case 5:
+
+          tgt[0] = leg_center;  spd[0] = 10;
+          tgt[1] = leg_center;  spd[1] = 10;
+          tgt[2] = leg_center;  spd[2] = 10;
+          tgt[3] = leg_center;  spd[3] = 10;
+          tgt[4] = leg_center;  spd[4] = 10;
+          tgt[5] = leg_center;  spd[5] = 10;
+          tgt[6] = leg_center;  spd[6] = 10;
+          tgt[7] = leg_center;  spd[7] = 10;
+
+          motor_mode = 6;
+          motor_count = 0;
+
+          led_mode = 4;
+          led_light = 0;
+
+          break;
+
+          case 6:
+          motor_mode = 7;
           break;
 
 
@@ -435,8 +458,9 @@ void master_motor_loop() {
           break;
 
           case 1:
-          led_mode = 5;
+          led_mode = 0;
           led_light = 0;
+          led_pos = 0;
 
           motor_mode = 2;
           break;
@@ -444,6 +468,60 @@ void master_motor_loop() {
 
 
       }
+      motor_count = 0;
+    }
+  }
+
+  if (walk_mode == 5) {
+
+    motor_count++;
+    //if(motor_count > 1000){
+    if (leg[now_move] == tgt[now_move]) {
+
+      switch (motor_mode) {
+        case 0:
+          tgt[2] = leg_center;  spd[2] = 10;
+          tgt[6] = leg_center;   spd[6] = 10;
+          now_move = 2;
+          break;
+
+        case 1:
+          tgt[1] = leg_fw13;  spd[1] = 10;
+          tgt[3] = leg_bw13;  spd[3] = 10;
+          tgt[5] = leg_fw57;  spd[5] = 10;
+          tgt[7] = leg_bw57;  spd[7] = 10;
+          now_move = 1;
+          break;
+
+        case 2:
+          tgt[2] = leg_down;  spd[2] = 10;
+          tgt[6] = leg_down;   spd[4] = 10;
+          now_move = 2;
+          break;
+
+        case 3:
+          tgt[0] = leg_center;    spd[0] = 10;
+          tgt[4] = leg_center;    spd[4] = 10;
+          now_move = 0;
+          break;
+
+        case 4:
+          tgt[1] = leg_bw13;  spd[1] = 10;
+          tgt[3] = leg_fw13;  spd[3] = 10;
+          tgt[5] = leg_bw57;  spd[5] = 10;
+          tgt[7] = leg_fw57;  spd[7] = 10;
+          now_move = 3;
+          break;
+
+        case 5:
+          tgt[0] = leg_down;    spd[0] = 10;
+          tgt[4] = leg_down;    spd[4] = 10;
+          now_move = 0;
+          break;
+      }
+      motor_mode++;
+      if (motor_mode == 6) motor_mode = 0;
+
       motor_count = 0;
     }
   }
