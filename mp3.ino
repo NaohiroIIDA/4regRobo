@@ -1,10 +1,10 @@
 
 
 
-void mp3_reset(){
+void mp3_reset() {
 
   mySerial.write((byte)0x7E);   // start
-  mySerial.write((byte)0xFF);   // 
+  mySerial.write((byte)0xFF);   //
   mySerial.write((byte)0x06);   // num
   mySerial.write((byte)0x0C);   // command
   mySerial.write((byte)0x00);   // res
@@ -15,7 +15,7 @@ void mp3_reset(){
   delay(1000);
 }
 
-void mp3_sdset(){
+void mp3_sdset() {
 
   mySerial.write((byte)0x7E);   // start
   mySerial.write((byte)0xFF);   // ver
@@ -29,7 +29,7 @@ void mp3_sdset(){
   delay(100);
 }
 
-void mp3_vol(byte vol){
+void mp3_vol(byte vol) {
 
   mySerial.write((byte)0x7E);   // start
   mySerial.write((byte)0xFF);   // ver
@@ -43,7 +43,7 @@ void mp3_vol(byte vol){
   delay(100);
 }
 
-void mp3_play(byte folder,byte track){
+void mp3_play(byte folder, byte track) {
 
   mySerial.write((byte)0x7E);   // start
   mySerial.write((byte)0xFF);   // ver
@@ -57,7 +57,7 @@ void mp3_play(byte folder,byte track){
   delay(100);
 }
 
-void mp3_stop(){
+void mp3_stop() {
 
   mySerial.write((byte)0x7E);   // start
   mySerial.write((byte)0xFF);   // ver

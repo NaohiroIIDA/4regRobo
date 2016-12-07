@@ -35,13 +35,13 @@ int get_light_power()
 int get_light_power_upside()
 {
   int power = AD_IN[4];
-  
+
   return power;
 
 }
 
 
-void debug_sensor(){
+void debug_sensor() {
   Serial.print(AD_IN[0]);
   Serial.print("\t" );
   Serial.print(AD_IN[1]);
