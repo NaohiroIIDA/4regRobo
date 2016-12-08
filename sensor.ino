@@ -10,7 +10,15 @@ void get_light()
 
 int get_light_dir()
 {
-  int dir = 0;
+  int dir = 1;
+  int fwd,side;
+
+  fwd =  AD_IN[0] +AD_IN[2];
+  side = AD_IN[1] +AD_IN[3];
+
+ 
+
+  
   if (( AD_IN[0] > AD_IN[1]) && ( AD_IN[0] > AD_IN[2]) && ( AD_IN[0] > AD_IN[3])) dir = 1;
   if (( AD_IN[1] > AD_IN[0]) && ( AD_IN[1] > AD_IN[2]) && ( AD_IN[1] > AD_IN[3])) dir = 2;
   if (( AD_IN[2] > AD_IN[0]) && ( AD_IN[2] > AD_IN[1]) && ( AD_IN[2] > AD_IN[3])) dir = 3;

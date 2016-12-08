@@ -2,7 +2,7 @@
 #include <SoftwareSerial.h>
 
 
-#define DEBUG
+//1#define DEBUG
 //#define DEMO
 
 #define PIN 10
@@ -100,10 +100,10 @@ void setup() {
   delay(100);
   mp3_reset();
   mp3_sdset();
-  mp3_vol(10);
+  mp3_vol(25);
 
 
-  mp3_play(1, 2);
+  mp3_play(1, 5);
 
   delay(2000);
 
@@ -179,17 +179,17 @@ void loop() {
     Serial.println(power2);
 #endif
 
-    if(power2 > 500){
+    if(power2 > 950){
       if(walk_mode != 3){
         walk_mode = 3;
         motor_mode = 0;
       }
 
-      if(walk_mode == 3 && motor_mode == 4 && power > 500){
+      if(walk_mode == 3 && motor_mode == 4 && power > 950){
         motor_mode = 5;
       }
 
-      if(walk_mode == 3 && motor_mode == 7 && power < 500){
+      if(walk_mode == 3 && motor_mode == 7 && power < 950){
         motor_mode = 0;
       }
 
@@ -205,6 +205,8 @@ void loop() {
 
         led_mode = 5;
         led_light = 0;
+
+        mp3_play(1, 5);
       }
 
       if(walk_mode == 0 || walk_mode == 1 || walk_mode == 2 ){
